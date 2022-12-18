@@ -121,6 +121,14 @@ pnpm doc           # open swagger-ui website for API documentation
 
 - spring-boot-maven-plugin
 
+- kotlin-maven-plugin
+
+  - Compile Kotlin before compile Java
+
+- maven-compiler-plugin
+
+  - Compile Java
+
 - exec-maven-plugin
 
   - Install git hook

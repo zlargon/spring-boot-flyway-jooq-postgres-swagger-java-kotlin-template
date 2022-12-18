@@ -136,12 +136,12 @@
     </dependencies>
   </dependencyManagement>
 
-  <!-- plugin -->
   <build>
     <!-- Explicitly use java as the source instead of kotlin -->
     <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
     <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
 
+    <!-- plugin -->
     <plugins>
       <!-- spring-boot-maven-plugin -->
       <plugin>
@@ -176,6 +176,78 @@
             <version>${kotlin.version}</version>
           </dependency>
         </dependencies>
+
+        <!-- https://www.baeldung.com/kotlin/maven-java-project -->
+        <!-- Handle both compile and test-compile goals, telling it where to find our sources.
+          By convention, we keep Java and Kotlin sources in different directories, though we
+          could put them all in the same -->
+        <executions>
+          <execution>
+            <id>kotlin-compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>kotlin-test-compile</id>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+                <sourceDir>${project.basedir}/src/test/java</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- maven-compiler-plugin -->
+      <!-- https://www.baeldung.com/kotlin/maven-java-project -->
+      <!-- Maven plugins executions happen according to the declaration order. So we should place
+        maven-compiler-plugin after kotlin-maven-plugin. But the former has two specific executions
+        that are executed before everything else during the phases: default-compile and default-testCompile.
+        We need to disable them and enable java-compile and java-test-compile instead to ensure that
+        kotlin-maven-plugin execution will happen before maven-compiler-plugin: -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>java-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>java-test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <!-- exec-maven-plugin -->
