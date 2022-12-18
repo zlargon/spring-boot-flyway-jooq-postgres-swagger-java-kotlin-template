@@ -9,4 +9,12 @@ if ! mvn -q prettier:check; then
   exit 1
 fi
 
-echo "[pre-commit] Prettier check ok"
+# if this fails, please run mvn ktlint:format to reformat
+echo '[pre-commit] Ktlint check the code format "mvn ktlint:check" ...'
+if ! mvn -q ktlint:check; then
+  echo_r "\n[ERROR] format check failed."
+  echo -e "Please run \"mvn ktlint:format\" to reformat\n"
+  exit 1
+fi
+
+echo "[pre-commit] Java and Kotlin code format check ok"

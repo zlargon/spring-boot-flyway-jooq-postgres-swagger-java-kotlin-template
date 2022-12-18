@@ -262,6 +262,18 @@
           </inputGlobs>
         </configuration>
       </plugin>
+
+      <!-- ktlint-maven-plugin -->
+      <plugin>
+        <groupId>com.github.gantsign.maven</groupId>
+        <artifactId>ktlint-maven-plugin</artifactId>
+        <version>1.15.2</version>
+
+        <configuration>
+          <sourceRoots>${project.basedir}/src/main/kotlin</sourceRoots>
+          <testSourceRoots>${project.basedir}/src/test/kotlin</testSourceRoots>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>

@@ -1,13 +1,15 @@
-# spring-boot-flyway-jooq-postgres-swagger-prettier-java-template
+# spring-boot-flyway-jooq-postgres-swagger-java-kotlin-template
 
 Create spring boot project from scratch:
 
-https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.7.6&packaging=jar&jvmVersion=11&groupId=com.zlargon&artifactId=springdemo&name=springdemo&description=&packageName=com.zlargon.springdemo&dependencies=lombok,devtools,jooq,postgresql,web,actuator,testcontainers,flyway
+https://start.spring.io/#!type=maven-project&language=kotlin&platformVersion=2.7.6&packaging=jar&jvmVersion=11&groupId=com.zlargon&artifactId=springdemo&name=springdemo&description=&packageName=com.zlargon.springdemo&dependencies=lombok,devtools,jooq,postgresql,web,actuator,testcontainers,flyway
 
 ## Features
 
 | Name            | Description                      |
 | --------------- | -------------------------------- |
+| Kotlin          |                                  |
+| ktlint          | Kotlin code format and lint      |
 | Spring Web MVC  |                                  |
 | Spring Devtools | Hot Reload Spring boot           |
 | Lombok          | Prevent boilerplate code         |
@@ -28,6 +30,7 @@ https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.7.6
 bash
 
 # Install by sdkman: https://sdkman.io/
+sdk install kotlin 1.6.21      # Kotlin 1.6.21
 sdk install java 11.0.17-zulu  # Java 11
 sdk install maven 3.8.6        # Maven
 sdk install jbang 0.101.0      # Jbang for running jOOQ code generator script
@@ -55,6 +58,7 @@ pnpm start         # run spring boot application
 pnpm test          # run tests by console launcher
 pnpm coverage      # run tests with code coverage and open the report website
 pnpm clean         # clean the project
+pnpm lint          # lint the source code
 pnpm format        # format the source code
 pnpm jooq:codegen  # run script to update jooq generated code
 pnpm doc           # open swagger-ui website for API documentation
@@ -131,6 +135,8 @@ pnpm doc           # open swagger-ui website for API documentation
     - printWidth: 120
     - tabWidth: 2
     - useTabs: false
+
+- ktlint-maven-plugin
 
 ## VSCode Plugins
 
