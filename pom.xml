@@ -270,6 +270,34 @@
         </executions>
       </plugin>
 
+      <!-- build-helper-maven-plugin -->
+      <!-- https://stackoverflow.com/a/55795344/2802074 -->
+      <!-- When we're using java and kotlin source, we need to use this build-helper to
+           generate the coverage for the kotlin files and it works for kotlin tests as well -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <!--
+            Add "src/main/kotlin" as additional source directory,
+            so that kotlin-maven-plugin and jacoco-maven-plugin will look for files in it
+            -->
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/src/main/kotlin</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- jacoco-maven-plugin -->
       <!-- https://www.baeldung.com/jacoco -->
       <!-- https://github.com/dailycodebuffer/Spring-MVC-Tutorials/blob/master/JaCoCo-Demo/pom.xml -->
